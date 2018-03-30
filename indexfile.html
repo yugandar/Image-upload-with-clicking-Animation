@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>second image</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<body>
+
+  <input type='file' id="imgInp""/>
+
+  <div id="gallery">
+  <div id="panel">
+    <img id="largeImage" src="#" />
+  </div>
+  <div id="thumbs">
+        <img src="http://robgolbeck.com/demos/image-swap/image_01_thumb.jpg" alt="1st image description" />
+        <img src="http://robgolbeck.com/demos/image-swap/image_02_thumb.jpg" alt="2nd image description" />
+        <img src="http://robgolbeck.com/demos/image-swap/image_03_thumb.jpg" alt="3rd image description" />
+        <img src="http://robgolbeck.com/demos/image-swap/image_04_thumb.jpg" alt="4th image description" />
+        <img src="http://robgolbeck.com/demos/image-swap/image_05_thumb.jpg" alt="5th image description" />
+  </div>
+</div>
+<style>
+#thumbs { padding-top: 10px; overflow: hidden; }
+#thumbs img, #largeImage {
+   border: 1px solid gray;
+   padding: 4px;
+   background-color: white;
+   cursor: pointer;
+}
+#thumbs img {
+   float: left;
+   margin-right: 6px;
+}
+#description {
+   background: black;
+   color: white;
+   position: absolute;
+   bottom: 0;
+   padding: 10px 20px;
+   width: 525px;
+   margin: 5px;
+}
+#panel {
+    position: relative;
+}
+</style>
+<script>
+	$('#thumbs img').click(function(){
+    $('#largeImage').attr('src',$(this).attr('src').replace('thumb','large'));
+    $('#description').html($(this).attr('alt'));
+});
+
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#largeImage').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imgInp").change(function() {
+  readURL(this);
+});
+</script>
+
+</body>
+</html>
